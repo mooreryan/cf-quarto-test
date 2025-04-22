@@ -4,10 +4,4 @@ This is a book created from markdown and executable code.
 
 See @knuth84 for additional discussion of literate programming.
 
-```{python}
-print("hello")
-```
-
-```{python}
-print("world")
-```
+This is some more text.
