@@ -7,7 +7,7 @@ on:
 name: Quarto Render
 
 jobs:
-  build-deploy:
+  render:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -18,20 +18,26 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Clean _book dir
-        run: if [ -d _book ]; then rm -r _book; fi
-
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # This renders to the current working directory
+      - name: Clean _book dir
+        run: if [ -d _book ]; then rm -r _book; fi
+
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
           to: html
           path: _book
 
-      - name: Move rendered book to cf-pages branch
+      - run: git checkout cf-pages
+      - run: if [ -d book ]; then rm -r book; fi
+      - run: mv _book book
+
+      - name: Commit site changes
         run: |
-          git checkout cf-pages
-          if [ -d _book ]; then rm -r _book; fi
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          git add book
+          git commit -m "Update site"
+          git push
