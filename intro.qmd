@@ -7,3 +7,7 @@ See @knuth84 for additional discussion of literate programming.
 ```{python}
 print("hello")
 ```
+
+```{python}
+print("world")
+```
