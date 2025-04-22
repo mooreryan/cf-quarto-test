@@ -28,7 +28,7 @@ jobs:
         uses: quarto-dev/quarto-actions/render@v2
         with:
           to: html
-          path: _book
+          # path: _book
 
       - run: git checkout cf-pages
       - run: if [ -d book ]; then rm -r book; fi
