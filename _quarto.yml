@@ -13,6 +13,7 @@ book:
     - intro.qmd
     - summary.qmd
     - references.qmd
+    - functions/index.qmd
 
 bibliography: references.bib
 
